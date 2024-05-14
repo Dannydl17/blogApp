@@ -1,4 +1,4 @@
-package dblogApp.data.model;
+package com.dblogApp.data.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

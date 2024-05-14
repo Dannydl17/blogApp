@@ -1,6 +1,6 @@
-package dblogApp.data.repositories;
+package com.dblogApp.data.repositories;
 
-import dblogApp.data.model.User;
+import com.dblogApp.data.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository  extends JpaRepository<User, Long> {

@@ -1,4 +1,4 @@
-package dblogApp.data.model;
+package com.dblogApp.data.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -21,6 +21,6 @@ public class Blog {
     @JsonIgnore
     private LocalDateTime createdAt;
 
-    @OneToMany(fetch = EAGER, cascade = {CascadeType.MERGE})
+    @ManyToOne(fetch = EAGER, cascade = {CascadeType.MERGE})
     private User user;
 }
