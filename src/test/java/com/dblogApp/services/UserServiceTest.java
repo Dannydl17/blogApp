@@ -1,5 +1,7 @@
 package com.dblogApp.services;
 
+import com.dblogApp.data.repositories.UserRepository;
+import com.dblogApp.dtos.request.UserLoginRequest;
 import com.dblogApp.dtos.request.UserRegistrationRequest;
 import com.dblogApp.dtos.response.UserRegistrationResponse;
 import com.dblogApp.exception.RegistrationFailedException;
@@ -13,12 +15,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static com.dblogApp.utils.Constants.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class UserServiceTest {
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private UserRepository userRepository;
     @BeforeEach
     public void startEachTestWith(){
         userService.deleteAll();
@@ -93,5 +97,15 @@ public class UserServiceTest {
                 .email("email@native.semicolon.africa")
                 .name("Danny_Big_Dawg")
                 .build();
+    }
+
+    @Test
+    public void testThatUserCanLoginTest() throws RegistrationFailedException {
+        UserRegistrationResponse response = userService.createUser(buildValidUser());
+        UserLoginRequest request = new UserLoginRequest();
+        request.setEmail(response.getEmail());
+        request.setPassword("Dan01@Big_Dawg");
+        userService.login(request);
+        assertEquals(1, userRepository.count());
     }
 }

@@ -2,8 +2,10 @@ package com.dblogApp.services;
 
 import com.dblogApp.data.model.User;
 import com.dblogApp.data.repositories.UserRepository;
+import com.dblogApp.dtos.request.UserLoginRequest;
 import com.dblogApp.dtos.request.UserRegistrationRequest;
 import com.dblogApp.dtos.response.UserRegistrationResponse;
+import com.dblogApp.exception.InvalidDetailsException;
 import com.dblogApp.exception.RegistrationFailedException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -52,5 +54,18 @@ public class BlogUserService implements UserService{
    @Override
    public boolean existsByEmail(String email) {
       return userRepository.existsByEmail(email);
+   }
+
+   @Override
+   public void login(UserLoginRequest request) {
+      User user = validateUserLogin(request.getEmail(), request.getPassword());
+   }
+
+   private User validateUserLogin(String email, String password) {
+      User user = userRepository.findUserByEmail(email);
+      if (user != null && user.getPassword().equals(password)){
+         return user;
+      }
+      throw new InvalidDetailsException();
    }
 }
