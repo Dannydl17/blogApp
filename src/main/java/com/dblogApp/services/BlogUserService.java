@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+import static com.dblogApp.utils.Constants.USER_REGISTRATION_SUCCESSFUL_MESSAGE;
+
 @Service
 @AllArgsConstructor
 public class BlogUserService implements UserService{
@@ -40,9 +42,15 @@ public class BlogUserService implements UserService{
          UserRegistrationResponse response = new UserRegistrationResponse();
          response.setName(savedUser.getUserName());
          response.setEmail(savedUser.getEmail());
+         response.setMessage(USER_REGISTRATION_SUCCESSFUL_MESSAGE);
          return response;
       }catch (Exception exception) {
          throw new RegistrationFailedException(exception.getMessage(), exception);
       }
+   }
+
+   @Override
+   public boolean existsByEmail(String email) {
+      return userRepository.existsByEmail(email);
    }
 }

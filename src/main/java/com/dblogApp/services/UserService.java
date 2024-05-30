@@ -9,4 +9,6 @@ public interface UserService {
     void deleteAll();
 
     UserRegistrationResponse createUser(UserRegistrationRequest request) throws RegistrationFailedException;
+
+    boolean existsByEmail(String email);
 }
