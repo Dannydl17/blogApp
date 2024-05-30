@@ -16,6 +16,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Blog {
     @Id
     @GeneratedValue(strategy = IDENTITY)
+    private Long id;
     private String title;
     private String content;
     @JsonIgnore
