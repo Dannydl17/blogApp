@@ -6,10 +6,8 @@ import com.dblogApp.dtos.response.UserRegistrationResponse;
 import com.dblogApp.exception.RegistrationFailedException;
 
 public interface UserService {
-
-    void deleteAll();
-
     UserRegistrationResponse createUser(UserRegistrationRequest request) throws RegistrationFailedException;
+    void deleteAll();
 
     boolean existsByEmail(String email);
 

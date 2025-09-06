@@ -23,5 +23,5 @@ public class Blog {
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = EAGER, cascade = {CascadeType.MERGE})
-    private User user;
+    private User user = new User();
 }

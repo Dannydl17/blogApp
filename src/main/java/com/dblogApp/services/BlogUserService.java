@@ -42,8 +42,6 @@ public class BlogUserService implements UserService{
 
          User savedUser = userRepository.save(user);
          UserRegistrationResponse response = new UserRegistrationResponse();
-         response.setName(savedUser.getUserName());
-         response.setEmail(savedUser.getEmail());
          response.setMessage(USER_REGISTRATION_SUCCESSFUL_MESSAGE);
          return response;
       }catch (Exception exception) {
